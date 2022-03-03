@@ -5,38 +5,28 @@ using UnityEngine.AI;
 
 public class MonsterAI : MonoBehaviour
 {
-    public float speed;
-
-    public Transform[] moveSpots;
-    private int randomSpot;
-
-    private float waitTime;
-    public float startWaitTime;
-
-
-    // Start is called before the first frame update
+    public Transform[] points;
+    private int destPoint = 0;
+    private NavMeshAgent agent;
     void Start()
     {
-        waitTime = startWaitTime;
-        randomSpot = Random.Range(0, moveSpots.Length);
+        agent = GetComponent<NavMeshAgent>();
+        GotoNextPoint();
     }
 
-    // Update is called once per frame
+
+    void GotoNextPoint()
+    {
+        if (points.Length == 0)
+            return; 
+        agent.destination = points[destPoint].position;
+        destPoint = (destPoint + 1) % points.Length;
+    }
+
+
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
-        {
-            if (waitTime <= 0)
-            {
-                randomSpot = Random.Range(0, moveSpots.Length);
-                waitTime = startWaitTime;
-            }
-            else
-            {
-                waitTime -= Time.deltaTime;
-            }
-        }
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            GotoNextPoint();
     }
 }
