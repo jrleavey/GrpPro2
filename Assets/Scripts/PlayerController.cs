@@ -8,11 +8,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 12f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
-    public float prayerBeadCount = 0;
+    public float saltCount = 0;
     public float groundDistance;
     public LayerMask groundMask;
     public Transform groundCheck;
-    public bool hasScroll = false;
+    public bool hasPrayerBead = false;
     public GameObject candleLight;
     public bool isLightOn = true;
 
@@ -66,13 +66,13 @@ public class PlayerController : MonoBehaviour
         controller.Move(Velocity * Time.deltaTime);
     }
 
-    public void AddPrayerBead()
+    public void AddSaltCount()
     {
-        prayerBeadCount++;
+        saltCount++;
     }
 
-    public void AddScroll()
+    public void AddPrayerBead()
     {
-        hasScroll = true;
+        hasPrayerBead = true;
     }
 }
