@@ -5,6 +5,7 @@ using UnityEngine;
 public class PrayerBeads : MonoBehaviour
 {
     public GameObject Player;
+    public GameObject pickupParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class PrayerBeads : MonoBehaviour
         if (other.tag == "Player")
         {
             Player.GetComponent<PlayerController>().AddPrayerBead();
+            Instantiate(pickupParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
