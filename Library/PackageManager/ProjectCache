@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637819310838499623
-    m_Hash: 659951101
+      ticks: 637821192470000000
+    m_Hash: 3495392058
   m_LockFileStatus:
     m_FilePath: C:/Users/jrlea/Desktop/Unity Projects/HallwayPro/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637819310838509593
-    m_Hash: 1413613287
+      ticks: 637821192470000000
+    m_Hash: 894664828
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -785,6 +785,7 @@ m_PackageAssets:
         - 1.6.4
         - 1.7.0-pre.1
         - 1.7.0-pre.2
+        - 1.7.0
         compatible:
         - 1.4.8
         - 1.5.0-pre.2
@@ -811,6 +812,7 @@ m_PackageAssets:
         - 1.6.4
         - 1.7.0-pre.1
         - 1.7.0-pre.2
+        - 1.7.0
         verified: 1.4.8
       dependencies:
       - name: com.unity.modules.director

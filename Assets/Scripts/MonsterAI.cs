@@ -8,10 +8,15 @@ public class MonsterAI : MonoBehaviour
     public Transform[] points;
     private int destPoint = 0;
     private NavMeshAgent agent;
+    private bool isPatrolling = true;
+    private bool isChasing = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        GotoNextPoint();
+        if (isPatrolling == true)
+        {
+            GotoNextPoint();
+        }
     }
 
 
