@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public GameObject _pausemenu;
     public GameObject _loseMenu;
     public GameObject _winMenu;
+    public GameObject pCamera;
     public bool _isPauseMenuOpen = false;
 
     private void Awake()
@@ -17,12 +18,16 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _isPauseMenuOpen == false)
+        if (Input.GetKeyDown(KeyCode.P) && _isPauseMenuOpen == false)
         {
+            pCamera.GetComponent<MouseLook>().enabled = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             isPaused();
         }
-        else if ((Input.GetKeyDown(KeyCode.Escape) && _isPauseMenuOpen == true))
+        else if ((Input.GetKeyDown(KeyCode.P) && _isPauseMenuOpen == true))
         {
+            pCamera.GetComponent<MouseLook>().enabled = true;
             isNotPaused();
         }
     }
@@ -55,8 +60,9 @@ public class MainMenu : MonoBehaviour
 
     public void isNotPaused()
     {
+        Time.timeScale = 1;
         _isPauseMenuOpen = false;
         _pausemenu.SetActive(false);
-        Time.timeScale = 1;
+        pCamera.GetComponent<MouseLook>().enabled = true;
     }
 }

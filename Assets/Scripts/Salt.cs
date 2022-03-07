@@ -6,10 +6,12 @@ public class Salt : MonoBehaviour
 {
     public GameObject Player;
     public GameObject pickupParticle;
+    private AudioSource AudioSource;
+    public AudioClip pickup;
     // Start is called before the first frame update
     void Start()
     {
-
+        AudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class Salt : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(pickup, transform.position);
             Player.GetComponent<PlayerController>().AddSaltCount();
             Instantiate(pickupParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);

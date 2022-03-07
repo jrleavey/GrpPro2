@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,13 +16,23 @@ public class PlayerController : MonoBehaviour
     public bool hasPrayerBead = false;
     public GameObject candleLight;
     public bool isLightOn = true;
-
     Vector3 Velocity;
     bool isGrounded;
+
+    private AudioSource AudioSource;
+    public AudioClip stunScream;
+    public AudioClip gameOverScream;
+    public AudioClip winSound;
+    public GameObject winScreen;
+    public GameObject loseScreen;
+    public GameObject obj1;
+    public GameObject obj2;
+    public GameObject pCamera;
+    public Text saltamount;
     // Start is called before the first frame update
     void Start()
     {
-
+        AudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,6 +48,10 @@ public class PlayerController : MonoBehaviour
         {
             candleLight.SetActive(true);
             isLightOn = true;
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
@@ -69,10 +84,48 @@ public class PlayerController : MonoBehaviour
     public void AddSaltCount()
     {
         saltCount++;
+        saltamount.text = "" + saltCount;
     }
 
     public void AddPrayerBead()
     {
         hasPrayerBead = true;
+    }
+    public void CaughtByMonster()
+    {
+        if (saltCount > 0)
+        {
+            saltCount--;
+            saltamount.text = "" + saltCount;
+            AudioSource.PlayClipAtPoint(stunScream, transform.position);
+            return;
+        }
+        else if (saltCount == 0)
+        {
+            AudioSource.PlayClipAtPoint(gameOverScream, transform.position);
+            loseScreen.SetActive(true);
+            Time.timeScale = 0;
+            pCamera.GetComponent<MouseLook>().enabled = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Bead")
+        {
+            obj1.SetActive(false);
+            obj2.SetActive(true);
+        }
+        if (other.tag == "Win")
+        {
+            pCamera.GetComponent<MouseLook>().enabled = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            winScreen.SetActive(true);
+            AudioSource.PlayClipAtPoint(winSound, transform.position);
+            Time.timeScale = 0;
+        }
     }
 }
